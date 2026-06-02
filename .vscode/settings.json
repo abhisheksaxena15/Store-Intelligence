@@ -1,0 +1,16 @@
+{
+  "python.analysis.extraPaths": ["."],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none",
+    "reportMissingImports": "warning",
+    "reportOptionalMemberAccess": "none",
+    "reportAttributeAccessIssue": "none",
+    "reportIndexIssue": "none",
+    "reportCallIssue": "none",
+    "reportOperatorIssue": "none",
+    "reportArgumentType": "none"
+  }
+}  

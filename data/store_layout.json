@@ -1,0 +1,74 @@
+{
+  "stores": {
+    "STORE_BLR_002": {
+      "name": "Apex Retail Bangalore South",
+      "city": "Bangalore",
+      "open_hours": {"start": "10:00", "end": "22:00"},
+      "cameras": {
+        "CAM_ENTRY_01": {
+          "clip_start_utc": "2026-03-03T10:00:00Z",
+          "entry_direction": "bottom_to_top",
+          "threshold_fraction": 0.15
+        },
+        "CAM_FLOOR_01": {
+          "clip_start_utc": "2026-03-03T10:00:00Z",
+          "entry_direction": null,
+          "threshold_fraction": null
+        },
+        "CAM_BILLING_01": {
+          "clip_start_utc": "2026-03-03T10:00:00Z",
+          "entry_direction": null,
+          "threshold_fraction": null
+        }
+      }
+    }
+  },
+  "cameras": {
+    "CAM_ENTRY_01": {
+      "entry_direction": "bottom_to_top",
+      "threshold_fraction": 0.15,
+      "zones": [
+        {
+          "zone_id": "ENTRY_LOBBY",
+          "polygon": [[0.0, 0.75], [1.0, 0.75], [1.0, 1.0], [0.0, 1.0]]
+        }
+      ]
+    },
+    "CAM_FLOOR_01": {
+      "entry_direction": null,
+      "threshold_fraction": null,
+      "zones": [
+        {
+          "zone_id": "SKINCARE",
+          "polygon": [[0.0, 0.0], [0.5, 0.0], [0.5, 0.5], [0.0, 0.5]]
+        },
+        {
+          "zone_id": "FRAGRANCE",
+          "polygon": [[0.5, 0.0], [1.0, 0.0], [1.0, 0.5], [0.5, 0.5]]
+        },
+        {
+          "zone_id": "HAIRCARE",
+          "polygon": [[0.0, 0.5], [0.5, 0.5], [0.5, 1.0], [0.0, 1.0]]
+        },
+        {
+          "zone_id": "MAKEUP",
+          "polygon": [[0.5, 0.5], [1.0, 0.5], [1.0, 1.0], [0.5, 1.0]]
+        }
+      ]
+    },
+    "CAM_BILLING_01": {
+      "entry_direction": null,
+      "threshold_fraction": null,
+      "zones": [
+        {
+          "zone_id": "BILLING_COUNTER",
+          "polygon": [[0.0, 0.0], [1.0, 0.0], [1.0, 0.6], [0.0, 0.6]]
+        },
+        {
+          "zone_id": "BILLING_QUEUE",
+          "polygon": [[0.0, 0.6], [1.0, 0.6], [1.0, 1.0], [0.0, 1.0]]
+        }
+      ]
+    }
+  }
+}

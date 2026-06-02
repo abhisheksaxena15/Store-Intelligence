@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.so
+.env
+*.db
+*.db-wal
+*.db-shm
+data/events/
+data/clips/
+htmlcov/
+.coverage
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+*.pt           # YOLO model weights (downloaded at runtime)
+*.pth          # torchreid weights (downloaded at runtime)
+.DS_Store
+data/clip/
+*.mp4
+*.pt

@@ -1,0 +1,13 @@
+{
+  "include": ["app", "pipeline", "tests", "dashboard", "scripts"],
+  "extraPaths": ["."],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning",
+  "reportMissingModuleSource": "none",
+  "reportGeneralTypeIssues": "warning",
+  "reportOptionalMemberAccess": "none",
+  "reportAttributeAccessIssue": "none",
+  "venvPath": ".",
+  "venv": "venv"
+}
