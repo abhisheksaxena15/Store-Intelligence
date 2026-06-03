@@ -228,7 +228,7 @@ STORE-INTELLIGENCE
 └─────────────────────┘
 ```
 ## Dashboard
-![Dashboard](images/dashboard.png)
+![Dashboard](images/Dashboard.png)
 
 ## Running the Detection Pipeline
 
