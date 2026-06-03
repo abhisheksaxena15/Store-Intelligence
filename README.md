@@ -254,6 +254,9 @@ python detect.py \
 ```
 
 Output: `../data/events/STORE_BLR_002_entry.jsonl` — one event per line.
+## Assertion
+<img src="images/assertion.png" width="800">
+
 
 ### All clips at once
 ```bash
@@ -273,6 +276,8 @@ python pipeline/ingest_events.py \
 ---
 
 ## API Reference
+<img src="images/Swagger.png" width="800">
+
 
 ### POST /events/ingest
 ```bash
@@ -378,6 +383,8 @@ docker compose down -v
 rm -f data/store_intelligence.db
 docker compose up -d
 ```
+<img src="images/docker_ps.png" width="800">
+
 
 ---
 
