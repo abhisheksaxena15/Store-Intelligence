@@ -299,27 +299,41 @@ curl -X POST http://localhost:8000/events/ingest \
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/metrics | jq
 ```
-<img src="images/metrics.png" width="900">
+<img src="images/metrics.png" width="800">
+<img src="images/dashboard_metrics.png" width="800">
+
 
 ### GET /stores/{id}/funnel
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/funnel | jq
 ```
+<img src="images/funnel.png" width="800">
+<img src="images/funnel_dashboard.png" width="800">
+
+
 
 ### GET /stores/{id}/heatmap
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/heatmap | jq
 ```
+<img src="images/heatmap.png" width="800">
+<img src="images/heatmap_funnel.png" width="800">
+
+
 
 ### GET /stores/{id}/anomalies
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/anomalies | jq
 ```
+<img src="images/anomalies.png" width="800">
+<img src="images/anomalies_dashboard.png" width="800">
 
 ### GET /health
 ```bash
 curl http://localhost:8000/health | jq
 ```
+<img src="images/Health.png" width="800">
+<img src="images/health01.png" width="800">
 
 ---
 
