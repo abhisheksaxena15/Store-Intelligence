@@ -30,6 +30,10 @@ cd pipeline && bash run.sh
 curl http://localhost:8000/stores/STORE_BLR_002/metrics
 ```
 
+## Swagger 
+<img src="images/Swagger.png" width="900">
+
+
 ## Data Flow
 
 ```
@@ -255,7 +259,7 @@ python detect.py \
 
 Output: `../data/events/STORE_BLR_002_entry.jsonl` — one event per line.
 ## Assertion
-<img src="images/assertion.png" width="800">
+<img src="images/assertion.png" width="900">
 
 
 ### All clips at once
@@ -276,7 +280,6 @@ python pipeline/ingest_events.py \
 ---
 
 ## API Reference
-<img src="images/Swagger.png" width="800">
 
 
 ### POST /events/ingest
@@ -304,16 +307,16 @@ curl -X POST http://localhost:8000/events/ingest \
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/metrics | jq
 ```
-<img src="images/metrics.png" width="800">
-<img src="images/dashboard_metrics.png" width="800">
+<img src="images/metrics.png" width="900">
+<img src="images/dashboard_metrics.png" width="900">
 
 
 ### GET /stores/{id}/funnel
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/funnel | jq
 ```
-<img src="images/funnel.png" width="800">
-<img src="images/funnel_dashboard.png" width="800">
+<img src="images/funnel.png" width="900">
+<img src="images/funnel_dashboard.png" width="900">
 
 
 
@@ -321,8 +324,8 @@ curl http://localhost:8000/stores/STORE_BLR_002/funnel | jq
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/heatmap | jq
 ```
-<img src="images/heatmap.png" width="800">
-<img src="images/heatmap_funnel.png" width="800">
+<img src="images/heatmap.png" width="900">
+<img src="images/heatmap_funnel.png" width="900">
 
 
 
@@ -330,15 +333,15 @@ curl http://localhost:8000/stores/STORE_BLR_002/heatmap | jq
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/anomalies | jq
 ```
-<img src="images/anomalies.png" width="800">
-<img src="images/anomalies_dashboard.png" width="800">
+<img src="images/anomalies.png" width="900">
+<img src="images/anomalies_dashboard.png" width="900">
 
 ### GET /health
 ```bash
 curl http://localhost:8000/health | jq
 ```
-<img src="images/Health.png" width="800">
-<img src="images/health01.png" width="800">
+<img src="images/Health.png" width="900">
+<img src="images/health01.png" width="900">
 
 ---
 
@@ -383,7 +386,7 @@ docker compose down -v
 rm -f data/store_intelligence.db
 docker compose up -d
 ```
-<img src="images/docker_ps.png" width="800">
+<img src="images/docker_ps.png" width="900">
 
 
 ---
