@@ -227,6 +227,9 @@ STORE-INTELLIGENCE
 │ Alerts              │
 └─────────────────────┘
 ```
+## Dashboard
+![Dashboard](images/dashboard.png)
+
 ## Running the Detection Pipeline
 
 ### Prerequisites
