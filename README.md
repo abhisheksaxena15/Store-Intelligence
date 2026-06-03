@@ -299,6 +299,7 @@ curl -X POST http://localhost:8000/events/ingest \
 ```bash
 curl http://localhost:8000/stores/STORE_BLR_002/metrics | jq
 ```
+<img src="images/metrics.png" width="900">
 
 ### GET /stores/{id}/funnel
 ```bash
