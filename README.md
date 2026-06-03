@@ -30,6 +30,39 @@ cd pipeline && bash run.sh
 curl http://localhost:8000/stores/STORE_BLR_002/metrics
 ```
 
+## Data Flow
+
+```
+CCTV Video
+    │
+    ▼
+YOLO Detection
+    │
+    ▼
+Tracking
+    │
+    ▼
+Person Re-ID
+    │
+    ▼
+Event Generation
+    │
+    ▼
+Redis Queue
+    │
+    ▼
+FastAPI Ingestion
+    │
+    ▼
+PostgreSQL
+    │
+    ▼
+Analytics Engine
+    │
+    ▼
+Dashboard
+```
+
 Dashboard is live at: **http://localhost:8501**
 API docs at: **http://localhost:8000/docs**
 
@@ -38,52 +71,162 @@ API docs at: **http://localhost:8000/docs**
 ## Project Structure
 
 ```
-store-intelligence/
-├── pipeline/
-│   ├── detect.py          # Main detection loop (YOLOv8 + ByteTrack)
-│   ├── tracker.py         # TrackState — per-track mutable state
-│   ├── reid.py            # ReIDManager — OSNet cross-camera re-identification
-│   ├── event_generator.py # Business logic: when to emit each event type
-│   ├── emit.py            # Schema validation + JSONL file writer
-│   ├── ingest_events.py   # POST events to API in batches
-│   └── run.sh             # One-command: process all clips → ingest
+STORE-INTELLIGENCE
+│
+├── .pytest_cache/
+├── .vscode/
 │
 ├── app/
-│   ├── main.py            # FastAPI entrypoint, middleware, routes
-│   ├── models.py          # Pydantic request/response schemas
-│   ├── ingestion.py       # Ingest service: dedup, validate, store
-│   ├── metrics.py         # /metrics and /heatmap computation
-│   ├── funnel.py          # /funnel computation
-│   ├── anomalies.py       # /anomalies: queue spike, conversion drop, dead zone
-│   ├── health.py          # /health: DB + per-store feed status
-│   └── db/
-│       ├── database.py    # Async SQLAlchemy engine + session factory
-│       └── orm_models.py  # ORM table definitions (events, sessions, anomalies)
+│   ├── __pycache__/
+│   ├── db/
+│   │   ├── __pycache__/
+│   │   ├── __init__.py
+│   │   ├── database.py
+│   │   └── orm_models.py
+│   │
+│   ├── __init__.py
+│   ├── anomalies.py
+│   ├── funnel.py
+│   ├── health.py
+│   ├── ingestion.py
+│   ├── main.py
+│   ├── metrics.py
+│   └── models.py
 │
 ├── dashboard/
-│   └── app.py             # Streamlit live dashboard
+│   ├── __pycache__/
+│   ├── __init__.py
+│   └── app.py
 │
-├── tests/
-│   ├── conftest.py        # Shared fixtures
-│   ├── test_ingest.py     # Ingest endpoint tests (+ AI prompt block)
-│   ├── test_metrics.py    # Metrics/funnel/heatmap tests (+ AI prompt block)
-│   ├── test_anomalies.py  # Anomaly detection tests (+ AI prompt block)
-│   └── test_pipeline.py   # Detection pipeline unit tests (+ AI prompt block)
+├── data/
+│   ├── clip/
+│   │   └── STORE_BLR_002/
+│   │       ├── CAM 1.mp4
+│   │       ├── CAM 2.mp4
+│   │       ├── CAM 3.mp4
+│   │       ├── CAM 4.mp4
+│   │       └── CAM 5.mp4
+│   │
+│   ├── events/
+│   │   ├── cam2.jsonl
+│   │   ├── cam3.jsonl
+│   │   ├── cam4.jsonl
+│   │   ├── cam5.jsonl
+│   │   └── STORE_BLR_002_entry.jsonl
+│   │
+│   ├── store_intelligence.db
+│   ├── store_intelligence.db-shm
+│   ├── store_intelligence.db-wal
+│   └── store_layout.json
 │
 ├── docs/
-│   ├── DESIGN.md          # Architecture + AI-assisted decisions
-│   └── CHOICES.md         # 3 decisions with full reasoning
+│   ├── CHOICES.md
+│   └── DESIGN.md
 │
-├── Dockerfile             # API container
-├── Dockerfile.dashboard   # Dashboard container
-├── docker-compose.yml     # Full stack orchestration
-├── requirements.txt       # Python dependencies
-├── pytest.ini             # Test configuration
-└── README.md              # This file
+├── htmlcov/
+│
+├── pipeline/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   ├── detect.py
+│   ├── emit.py
+│   ├── event_generator.py
+│   ├── ingest_events.py
+│   ├── reid.py
+│   ├── run.sh
+│   ├── tracker.py
+│   └── yolov8n.pt
+│
+├── scripts/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   └── simulate_realtime.py
+│
+├── tests/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   ├── test_anomalies.py
+│   ├── test_ingest.py
+│   ├── test_metrics.py
+│   └── test_pipeline.py
+│
+├── venv/
+│
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── Dockerfile.dashboard
+├── pyproject.toml
+├── pyrightconfig.json
+├── pytest.ini
+├── README.md
+├── requirements.txt
+└── yolov8n.pt
 ```
 
 ---
 
+## System Architecture
+```
+┌─────────────────────┐
+│   CCTV Cameras      │
+│ (5 Camera Streams)  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Computer Vision     │
+│ Pipeline            │
+│                     │
+│ YOLOv8 Detection    │
+│ Tracking            │
+│ Person Re-ID        │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Event Generator     │
+│                     │
+│ ENTRY               │
+│ ZONE_VISIT          │
+│ BILLING_QUEUE       │
+│ PURCHASE            │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ Redis Queue         │
+│ (Event Streaming)   │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ FastAPI Backend     │
+│                     │
+│ Event Ingestion     │
+│ Metrics Engine      │
+│ Funnel Engine       │
+│ Heatmap Engine      │
+│ Anomaly Engine      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ PostgreSQL / SQLite │
+│ Analytics Database  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ React Dashboard     │
+│                     │
+│ Real-time Metrics   │
+│ Funnel Analytics    │
+│ Heatmaps            │
+│ Alerts              │
+└─────────────────────┘
+```
 ## Running the Detection Pipeline
 
 ### Prerequisites
